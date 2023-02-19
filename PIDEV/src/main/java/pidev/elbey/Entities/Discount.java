@@ -22,5 +22,5 @@ public class Discount implements Serializable {
     private float percentage;
     @ManyToMany(mappedBy= "discounts",
             cascade = CascadeType.ALL)
-    private Set<Order> orders;
+    private Set<Orders> orders;
 }

@@ -14,13 +14,11 @@ import java.util.List;
 @Transactional
 @Slf4j
 
-public class UserService implements IUserService{
+public class ElBeyService implements IElBeyService {
     @Autowired
     UserRepo userRepo;
     @Autowired
     RolesRepo rolesRepo;
-    @Autowired
-    ProductRepo productRepo;
 
 
     @Override

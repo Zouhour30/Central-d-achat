@@ -35,7 +35,7 @@ public class User implements Serializable {
     private Set<Product> Products;
 
     @OneToOne()
-    private Order order;
+    private Orders orders;
 
     @OneToMany(cascade = CascadeType.ALL,
             mappedBy="user")

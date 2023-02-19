@@ -5,7 +5,7 @@ import pidev.elbey.Entities.User;
 
 import java.util.List;
 
-public interface IUserService {
+public interface IElBeyService {
     User saveUser(User user);
     Roles saveRole(Roles role);
     void AddRoleToUser(String username,String roleName);
