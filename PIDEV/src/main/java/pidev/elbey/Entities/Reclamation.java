@@ -2,7 +2,6 @@ package pidev.elbey.Entities;
 
 import java.io.Serializable;
 import java.util.Date;
-import java.util.Set;
 
 import lombok.*;
 
@@ -26,5 +25,5 @@ public class Reclamation implements Serializable{
     @Column(name = "dateReclamation", nullable = false)
     private Date dateReclamation;
     @ManyToOne()
-    private Order order;
+    private Orders orders;
 }

@@ -23,5 +23,5 @@ public class Payment implements Serializable {
     private Date datePayement;
 
     @OneToOne(mappedBy="payment")
-    private Order order;
+    private Orders orders;
 }

@@ -1,10 +1,11 @@
 package pidev.elbey.Entities;
 
 import java.io.Serializable;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
-import java.io.Serializable;
 import java.util.Date;
 import java.util.Set;
 
@@ -25,8 +26,9 @@ public class Delivery implements Serializable {
     @Column(name = "dateDilevery", nullable = false)
     private Date dateDilevery;
 
+    @JsonIgnore
     @OneToMany(cascade =CascadeType.ALL)
-    private Set<Order> orders;
+    private Set<Orders> orders;
 
     @OneToOne
     private BillToSeen billtoseen;
