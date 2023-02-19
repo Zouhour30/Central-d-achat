@@ -1,5 +1,6 @@
-package com.example.testspring.Entities;
+package pidev.elbey.Entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
@@ -20,5 +21,7 @@ public class Basket implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idBasket;
 
-   private float totalPrice;
+    @JsonIgnore
+    @OneToMany(cascade =CascadeType.ALL)
+    private Set<Orders> orders;
 }
