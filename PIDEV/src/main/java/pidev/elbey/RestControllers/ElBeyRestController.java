@@ -2,6 +2,7 @@ package pidev.elbey.RestControllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import pidev.elbey.Entities.BillToSeen;
 import pidev.elbey.Entities.Delivery;
 import pidev.elbey.Entities.Roles;
 import pidev.elbey.Entities.User;
@@ -28,6 +29,20 @@ public class ElBeyRestController {
     @DeleteMapping("/delete/{idDelivery}")
     public void deleteDelivery(@PathVariable Long idDelivery) {
         userService.deleteDelivery(idDelivery);
+    }
+    @PostMapping("/billToSeen/add")
+    BillToSeen addBillToSeen(@RequestBody BillToSeen billToSeen){
+        return userService.addBillToSeen(billToSeen);}
+    @GetMapping("/Bills")
+    List<BillToSeen> getBills(){
+        return userService.getBills();
+    }
+    @PutMapping("/BillToSeen/update")
+    BillToSeen updateBillToSeen(@RequestBody BillToSeen billToSeen){
+        return userService.updateBillToSeen(billToSeen);}
+    @DeleteMapping("/{idBillToSeen}")
+    public void deleteBillToSeen(@PathVariable Long idBillToSeen) {
+        userService.deleteBillToSeen(idBillToSeen);
     }
 
     @GetMapping("/users")

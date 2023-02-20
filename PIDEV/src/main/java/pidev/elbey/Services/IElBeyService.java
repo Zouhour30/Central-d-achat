@@ -1,6 +1,7 @@
 package pidev.elbey.Services;
 
 import org.springframework.web.bind.annotation.RequestBody;
+import pidev.elbey.Entities.BillToSeen;
 import pidev.elbey.Entities.Delivery;
 import pidev.elbey.Entities.Roles;
 import pidev.elbey.Entities.User;
@@ -12,6 +13,10 @@ public interface IElBeyService {
     List<Delivery>getdeliveries();
     Delivery updateDelivery(Delivery delivery);
     void deleteDelivery(Long id);
+    BillToSeen addBillToSeen(BillToSeen billToSeen);
+    List<BillToSeen>getBills();
+    BillToSeen updateBillToSeen(BillToSeen billToSeen);
+    void deleteBillToSeen(Long id);
     User saveUser(User user);
     Roles saveRole(Roles role);
     void AddRoleToUser(String username,String roleName);
