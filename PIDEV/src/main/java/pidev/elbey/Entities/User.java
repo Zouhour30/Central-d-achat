@@ -12,8 +12,8 @@ import java.util.Set;
 @Getter
 @Setter
 @AllArgsConstructor
-
 @RequiredArgsConstructor
+
 public class User implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -45,7 +45,6 @@ public class User implements Serializable {
     @OneToMany(cascade = CascadeType.ALL,
             mappedBy="user")
     private Set<Offer> offers;
-
 
 
 }
