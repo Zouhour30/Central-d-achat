@@ -1,5 +1,6 @@
 package com.example.testspring.RestControllers;
 
+import com.example.testspring.Entities.Basket;
 import com.example.testspring.Entities.Category;
 import com.example.testspring.Entities.ImageModel;
 import com.example.testspring.Entities.Product;
@@ -115,6 +116,18 @@ public void deleteProduct(@PathVariable Long id) {
             }
             return imageModels;
         }
+    @PostMapping("/addBasket")
+    public Basket addBasket(Basket basket){
+        return elBeyService.addBasket(basket);
+    }
 
+  @PutMapping ("/addProductsToBasket")
+    public  Basket addProductsToBasket(@RequestBody Basket basket, @RequestParam List<Long> ids){
+        return elBeyService.addProductsToBasket(basket, ids);
+    }
+    @PutMapping ("/deleteProductFromBakset/{idBasket}/{idProduct}")
+    public  Product deleteProductFromBasket(@PathVariable long idBasket, @PathVariable long idProduct){
+        return elBeyService.deleteProductFromBasket(idBasket,idProduct);
+    }
 
 }

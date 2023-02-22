@@ -1,5 +1,6 @@
 package com.example.testspring.Service;
 
+import com.example.testspring.Entities.Basket;
 import com.example.testspring.Entities.Category;
 import com.example.testspring.Entities.Product;
 
@@ -29,5 +30,12 @@ public interface IElBeyService {
 
      Product assignProductToCategory(long idProduct, long idCategory);
      //void affecterProductCategory(String nameCategory, String productName);
+
+     ///////////////////BASKET
+     Basket addBasket(Basket basket);
+
+     Basket addProductsToBasket(Basket basket, List<Long>ids );
+
+     Product deleteProductFromBasket(long idBasket, long idProduct);
 
 }

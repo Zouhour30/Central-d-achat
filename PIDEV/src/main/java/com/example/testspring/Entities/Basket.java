@@ -24,4 +24,8 @@ public class Basket implements Serializable {
     @JsonIgnore
     @OneToMany(cascade =CascadeType.ALL)
     private Set<Orders> orders;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy="basket")
+    private Set<Product> products;
+
 }

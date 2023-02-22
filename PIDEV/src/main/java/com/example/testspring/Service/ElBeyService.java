@@ -1,5 +1,6 @@
 package com.example.testspring.Service;
 
+import com.example.testspring.Entities.Basket;
 import com.example.testspring.Entities.Category;
 import com.example.testspring.Entities.Product;
 import com.example.testspring.Repository.BasketReprository;
@@ -87,6 +88,32 @@ public class ElBeyService implements IElBeyService {
         product.setCategory(category);
         productRepository.save(product);
         return product;
+
+    }
+
+    @Override
+    public Basket addBasket(Basket basket) {
+        return basketReprository.save(basket);
+    }
+
+    @Override
+    public Basket addProductsToBasket(Basket basket, List<Long> ids) {
+      for(Long idp:ids){
+          Product p=productRepository.findById(idp).get();
+          p.setBasket(basket);
+          productRepository.save(p);
+      }
+        return basketReprository.save(basket);
+    }
+
+    @Override
+    public Product deleteProductFromBasket(long idBasket, long idProduct) {
+
+        Basket basket=basketReprository.findById(idBasket).get();
+        Product product=productRepository.findById(idProduct).get();
+        product.setBasket(null);
+
+       return   productRepository.save(product);
 
     }
     /*@Override

@@ -45,8 +45,11 @@ public class Product implements Serializable {
             mappedBy="product")
     private Set<Tender> tenders;
 
-    @ManyToOne(cascade = CascadeType.ALL)
-    private Basket basket;
+    /*@ManyToOne(cascade = CascadeType.ALL)
+    private Basket basket;*/
+
+    @ManyToOne
+    Basket basket;
       @JsonIgnore
     @ManyToOne
     private Category category;
