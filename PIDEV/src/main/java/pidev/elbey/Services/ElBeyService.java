@@ -62,9 +62,8 @@ public class ElBeyService implements IElBeyService , UserDetailsService {
         User user = userRepo.findByUsername(username);
         Roles role= rolesRepo.findByName(roleName);
         user.getRoles().add(role);
-
-
     }
+
 
     @Override
     public User getUser(String username) {
