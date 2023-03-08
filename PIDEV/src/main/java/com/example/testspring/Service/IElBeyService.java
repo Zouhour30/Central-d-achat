@@ -3,7 +3,11 @@ package com.example.testspring.Service;
 import com.example.testspring.Entities.Basket;
 import com.example.testspring.Entities.Category;
 import com.example.testspring.Entities.Product;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.multipart.MultipartFile;
 
+import javax.xml.ws.Response;
+import java.io.IOException;
 import java.util.List;
 
 public interface IElBeyService {
@@ -38,4 +42,26 @@ public interface IElBeyService {
 
      Product deleteProductFromBasket(long idBasket, long idProduct);
 
+     void removeBasket(Long idBasket);
+
+      String UploadImage(String path, MultipartFile file) throws IOException;
+
+    List<Product>findProductsByCategory(String nameCategory);
+
+    String watchYourBudget(long idBasket);
+
+     List<Product> findProductsByOrderByPriceProduct();
+/////stat
+          Long getProductCount();
+
+    Long getTotalProductQuantity();
+    Double getAverageProductQuantity();
+    Integer getMinProductQuantity();
+    Integer getMaxProductQuantity();
+
+    //rating
+    ResponseEntity<String> rateProduct(Long idProduct, double rating);
+
+    //rate out of 10
+    void rateProduct2(Long idProduct, double rating);
 }

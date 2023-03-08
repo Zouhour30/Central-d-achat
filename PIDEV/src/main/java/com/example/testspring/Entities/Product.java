@@ -26,6 +26,7 @@ public class Product implements Serializable {
     private float priceProduct;
     private int quantityProduct;
     private String descriptionProduct;
+    private  double rating;
 
     @ManyToMany(fetch = FetchType.EAGER,cascade = CascadeType.ALL)
     @JoinTable(name="Product_images",

@@ -22,13 +22,12 @@ public class ImageModel  {
     private  Long imageId;
     private String name;
     private String type;
-    @Column(length =50000000)
-    private byte[] picByte;
 
-    public ImageModel(String name, String type, byte[] picByte) {
+
+    public ImageModel(String name, String type) {
         this.name = name;
         this.type = type;
-        this.picByte = picByte;
+
     }
 
 }
