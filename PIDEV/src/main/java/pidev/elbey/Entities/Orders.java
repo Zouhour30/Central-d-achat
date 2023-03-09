@@ -1,6 +1,7 @@
 package pidev.elbey.Entities;
 
 import java.io.Serializable;
+import java.util.Collection;
 import java.util.Date;
 import java.util.Set;
 
@@ -22,6 +23,7 @@ public class Orders implements Serializable {
     private Long idOrder;
     private String descriptionOrder;
     private double totalOrder;
+    private String nameOrder;
     private String codePromo;
     @Temporal(TemporalType.DATE)
     @Column(name = "dateOrdre", nullable = false)
@@ -29,10 +31,10 @@ public class Orders implements Serializable {
 
     @OneToOne(mappedBy= "orders")
     private User user;
+    
+    @OneToMany(mappedBy="order")
+	private Collection<Reclamation> reclamations;
 
-    @OneToMany(cascade = CascadeType.ALL,
-            mappedBy= "orders")
-    private Set<Reclamation> reclamations;
 
     @OneToOne
     private Payment payment;
