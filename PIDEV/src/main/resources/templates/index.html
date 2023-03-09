@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Chat Room</title>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vue@3.2.19/dist/vue.global.min.js"></script>
+  <script src="/webjars/sockjs-client/1.0.2-RELEASE/sockjs.min.js"></script>
+  <script src="/webjars/stomp-websocket/2.3.3/dist/stomp.min.js"></script>
+</head>
+<body>
+<div id="app">
+  <h1>Chat Room</h1>
+  <div v-if="!username">
+    <label for="username">Enter your username:</label>
+    <input type="text" id="username" v-model="tempUsername">
+    <button @click="setUsername">Join chat</button>
+  </div>
+  <div v-else>
+    <div>
+      <h2>Welcome, {{ username }}</h2>
+      <button @click="leaveChat">Leave chat</button>
+    </div>
+    <div>
+      <h3>Messages:</h3>
+      <ul>
+        <li v-for="message in messages" :key="message.id">
+          {{ message.sender }}: {{ message.content }}
+        </li>
+      </ul>
+    </div>
+    <div>
+      <input type="text" id="message" v-model="newMessageContent" @keyup.enter="sendMessage">
+      <button @click="sendMessage">Send message</button>
+    </div>
+  </div>
+</div>
+<script>
+  const SOCKET_URL = '/ws';
+  const stompClient = Stomp.over(new SockJS(SOCKET_URL));
+  const app = Vue.createApp({
+    data() {
+      return {
+        tempUsername: '',
+        username: '',
+        newMessageContent: '',
+        messages: []
+      }
+    },
+    methods: {
+      setUsername() {
+        if (this.tempUsername.trim()) {
+          this.username = this.tempUsername.trim();
+          stompClient.connect({}, this.onConnected, this.onError);
+        }
+      },
+      onConnected() {
+        stompClient.subscribe('/topic/public', this.onMessageReceived);
+        stompClient.send("/app/chat.addUser", {}, JSON.stringify({sender: this.username, type: 'JOIN'}));
+      },
+      onMessageReceived(payload) {
+        const message = JSON.parse(payload.body);
+        this.messages.push(message);
+      },
+      onError(error) {
+        console.error(error);
+      },
+      sendMessage() {
+        const messageContent = this.newMessageContent.trim();
+        if (messageContent) {
+          const message = {
+            sender: this.username,
+            content: messageContent,
+            type: 'CHAT'
+          };
+          stompClient.send("/app/chat.sendMessage", {}, JSON.stringify(message));
+          this.newMessageContent = '';
+        }
+      },
+      leaveChat() {
+        stompClient.send("/app/chat.sendMessage", {}, JSON.stringify({sender: this.username, type: 'LEAVE'}));
+        stompClient.disconnect();
+        this.username = '';
+        this.tempUsername = '';
+        this.messages = [];
+      }
+    }
+  });
+  app.mount('#app');
+</script>
+</body>
+</html>
